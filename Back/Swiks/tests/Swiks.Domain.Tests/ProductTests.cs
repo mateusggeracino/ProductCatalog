@@ -17,7 +17,7 @@ namespace Swiks.Domain.Tests
         }
 
         [Fact(DisplayName = "Insert a new Product valid")]
-        [Trait("Product", "Product Fixture Tests")]
+        [Trait("Product", "Product Insert Test Success")]
         public void Product_Insert_IsValid()
         {
             //Arrange
@@ -33,6 +33,24 @@ namespace Swiks.Domain.Tests
             Assert.NotNull(result);
             Assert.Equal(0, product.ValidationResult.Errors.Count);
             productRepository.Verify(x => x.Insert(product), Times.Once);
+        }
+
+        [Fact(DisplayName = "Insert a new Product Invalid")]
+        [Trait("Product", "Product Insert Test Fail")]
+        public void Product_Insert_IsNotValid()
+        {
+            //Arrange
+            var product = _productTestsFixture.ProductNotValid();
+            var productRepository = new Mock<IProductRepository>();
+            var productServices = new ProductServices(productRepository.Object);
+
+            //Act
+            var result = productServices.Insert(product);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(2, product.ValidationResult.Errors.Count);
+            productRepository.Verify(x => x.Insert(product), Times.Never);
         }
     }
 }
