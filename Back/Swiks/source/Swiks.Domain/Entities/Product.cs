@@ -6,6 +6,7 @@ namespace Swiks.Domain.Entities
 {
     public class Product : Entity
     {
+        private Product() { }
         public Product(string name, string description, double price, int categoryId)
         {
             Name = name;

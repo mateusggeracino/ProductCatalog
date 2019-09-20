@@ -7,6 +7,7 @@ namespace Swiks.Domain.Entities.Base
     {
         protected Entity()
         {
+            UniqueKey = Guid.NewGuid();
             ValidationResult = new ValidationResult();
         }
 

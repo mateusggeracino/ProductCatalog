@@ -6,7 +6,7 @@ namespace Swiks.Repository.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        private IList<Product> _data;
+        private static IList<Product> _data;
         private object _asyncObj = new object();
 
         public ProductRepository()
